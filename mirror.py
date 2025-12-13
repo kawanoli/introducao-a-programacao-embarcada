@@ -2,8 +2,6 @@ import streamlit as st
 import requests
 import json
 from streamlit_ace import st_ace
-
-import streamlit as st
 import textwrap
 
 def st_success_multiline(msg: str):

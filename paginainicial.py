@@ -4,7 +4,7 @@ from cabecalho import cria_cabecalho
 def pagina_inicial():
     cria_cabecalho()
     
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3 = st.columns([5, 1, 5])
     with col2:
         st.image("images/timbu.png", caption="\"A vitória pertence aquele que acredita nela, e aquele que acredita nela por mais tempo.\" ~Pearl Harbor", width=200)
     
