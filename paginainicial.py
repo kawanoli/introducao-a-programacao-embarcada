@@ -88,7 +88,7 @@ def pagina_inicial():
     col1, col2, col3 = st.columns([5, 5, 5])
     with col2:
         #st.image("images/git.png", width=200)
-        git = img_to_base64("images/git.png")
+        git = img_to_base64("images/git.PNG")
         st.markdown(
             f"""
             <a href="https://docs.google.com/presentation/d/1RsrSoX_vt9J8jy0HxHINgUUeXOTDO30Gi27uQEpv4VY/edit?usp=sharing">
