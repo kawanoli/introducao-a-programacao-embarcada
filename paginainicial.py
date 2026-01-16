@@ -79,6 +79,9 @@ def pagina_inicial():
     st.markdown("""
     Ter boas referências é essencial para consolidar a lógica e o raciocínio em programação. **Grokking Algorithms** ajuda a entender algoritmos de forma visual e intuitiva; **Princípios e Práticas de Programação com C++** aprofunda a base e a filosofia da linguagem; e o **Competitive Programmer’s Handbook** estimula a aplicação prática, otimização e pensamento crítico. Juntos, esses livros se complementam: fixam conceitos, fortalecem a base técnica e incentivam a prática constante.
     """)
+    col1, col2, col3 = st.columns([5, 5, 5])
+    with col2:
+        st.image("images/books.PNG", width=600)
 
     st.markdown('<a name="git"></a>', unsafe_allow_html=True)
     st.markdown("## Material básico de git")
