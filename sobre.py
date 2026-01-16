@@ -22,13 +22,22 @@ def sobre_mim():
         """)
         
         st.markdown("""
-        - 👀 Tenho interesse em Sistemas Embarcados, IoT, Robótica e sistemas de mobilidade, como sistemas automotivos, aeronaves e foguetes.
-        - 🌱 Atualmente, estou focado em aprender mais sobre Microcontroladores, RTOS e Visão Computacional.
-        - 💞️ Buscando colaborar em novos desafios.
+        Olá 👋! Meu nome é Kawan, tenho 22 anos e sou um estudante de Engenharia da Computação na UFRN, e atualmente, membro do setor de eletrônica daqui do PRD
 
-        Olá 👋! Meu nome é Kawan, tenho 22 anos e sou um estudante de Engenharia da Computação na UFRN em busca de oportunidades em sistemas embarcados e software embarcado, especialmente com OpenCV e técnicas aplicadas de Visão Computacional.
+        - Técnico em Eletrotécnica pelo IFRN Central
 
-        Também aprecio aprendizado de máquina e aprendizado profundo, pois podem ser muito valiosos para aplicações em sistemas/software embarcados.
+        - Membro do PRD no setor de Eletrônica desde 2024.2
+
+        - Ex Monitor de Lógica de Programação por 1 ano e meio
+
+        - Ex Membro do URA, onde pude participar de eventos de divulgação científica
+
+        - Apaixonado por engenharia e fascinado por veículos de engenharia (foguetes, carros, aviões, etc)
+
+        - Minhas áreas de interesse são sistemas embarcados e visão computacional (e, claro, qualquer coisa correlata)
+
+        - Atualmente faço parte da equipe de desenvolvimento do PotyraSat
+
 
         ---
 
@@ -41,8 +50,6 @@ def sobre_mim():
         
         st.markdown("""
         ---
-
-        Com o objetivo de aprimorar minha proficiência em aprendizado de máquina, visão computacional e aprendizado profundo para aplicar essas habilidades em sistemas embarcados e softwares em geral, estou aberto a oportunidades de aprender sobre tecnologias relevantes e colaborar nesta área.
 
         Sinta-se à vontade para entrar em contato se tiver alguma oportunidade interessante ou sugestões! 😉
 
@@ -57,3 +64,11 @@ def sobre_mim():
         with col2:
             contact_style()
         
+
+
+
+
+
+
+
+

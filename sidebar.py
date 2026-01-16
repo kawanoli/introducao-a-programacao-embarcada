@@ -16,6 +16,9 @@ def menu_lateral():
         sidebar_style([
         ("Introdução", "introducao"),
         ("Materiais", "contexto"),
+        ("Configurando o ambiente", "ambiente"),
+        ("Recomendações bibliográficas", "biblio"),
+        ("Material básico de git", "git"),
         ])
         pagina_inicial()
 

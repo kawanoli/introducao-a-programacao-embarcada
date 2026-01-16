@@ -706,10 +706,24 @@ def questao28(key=None):
     default_code_q28 = None
 
     tests_q28 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+        "100 102 101 103 104 102 101 100 99 98",
+        "100 102 101 103 104 102 101 100 99 98"
+        ),
+
+        # Caso 2 – Um valor ruidoso
+        (
+            "100 100 100 200 100 100 100 100 100 100",
+            "100 100 100 150 100 100 100 100 100 100"
+        ),
+
+        # Caso 3 – Vários ruídos consecutivos
+        (
+            "50 50 50 200 250 10 50 50 50 50",
+            "50 50 50 125 162 61 83 76 61 61"
+        )
     ]
+    
 
     editor_cpp(default_code=default_code_q28, tests=tests_q28, key="q28")
 
@@ -1171,9 +1185,23 @@ def questao46(key=None):
     default_code_q46 = """// menorValorRec(v, n)"""
 
     tests_q46 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        # Teste 1 – Valores variados
+        (
+            "512 400 300 900 1023 250 600 700 100 800",
+            "100"
+        ),
+
+        # Teste 2 – Menor valor no início
+        (
+            "0 200 400 600 800 1023 500 300 700 900",
+            "0"
+        ),
+
+        # Teste 3 – Todos valores iguais
+        (
+            "256 256 256 256 256 256 256 256 256 256",
+            "256"
+        )
     ]
 
     editor_cpp(default_code=default_code_q46, tests=tests_q46, key="q46")
