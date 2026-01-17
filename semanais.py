@@ -143,7 +143,7 @@ def semanais():
             #st.image("images/quests/button.png", width=200)
             st.markdown(
                 f"""
-                <a href="{"https://youtu.be/4cc0wimOwA8?si=BfF-X_5tLATBqnoW"}" target="_blank">
+                <a href="{"https://drive.google.com/file/d/1xEnCp4BS6pee9_T3kkq20h3UoZJJ8MbO/view?usp=drive_link"}" target="_blank">
                     <img src="data:image/png;base64,{img_button}" 
                         width="200" 
                         style="
@@ -212,7 +212,7 @@ O resultado final deve indicar se cada coluna está **Estável** ou **Instável*
         with col2:
             st.markdown(
                 f"""
-                <a href="{"https://youtu.be/4cc0wimOwA8?si=BfF-X_5tLATBqnoW"}" target="_blank">
+                <a href="{"https://drive.google.com/file/d/1P-BXVSo4xRMxji-zScg9PY4A1OjMD65r/view?usp=drive_link"}" target="_blank">
                     <img src="data:image/png;base64,{img_button}" 
                         width="200" 
                         style="
@@ -345,7 +345,7 @@ Cada ação do jogo deve ser registrada no terminal, permitindo acompanhar o que
         with col2:
             st.markdown(
                 f"""
-                <a href="{"https://youtu.be/4cc0wimOwA8?si=BfF-X_5tLATBqnoW"}" target="_blank">
+                <a href="{"https://drive.google.com/file/d/1t3EXTcLRP25HN87Qe4ByTsIuGbt2-hA1/view?usp=drive_link"}" target="_blank">
                     <img src="data:image/png;base64,{img_button}" 
                         width="200" 
                         style="
