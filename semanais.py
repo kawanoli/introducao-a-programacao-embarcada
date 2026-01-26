@@ -26,6 +26,15 @@ int main() {
 }
 """
 
+rad_code = """
+// Converte ângulo de graus para radianos
+double grausParaRadianos(double graus) {
+    return graus * 3.141592653589793 / 180.0;
+}
+"""
+
+
+
 def semanais():
     escolha = option_menu(
         menu_title=None,
@@ -360,8 +369,286 @@ Cada ação do jogo deve ser registrada no terminal, permitindo acompanhar o que
         st.markdown("**Sinta-se livre para mudar os nomes dos times, atributos, ou adicionar times, caso deseje**")
         
     elif escolha == "Semana 2":
-        st.markdown("# Atividades Semanais - Semana 2")
-        st.markdown("### :cry: Por enquanto aqui está vazio")
+        with open("images/timbu.png", "rb") as f:
+            data1 = f.read()
+            data1_base64 = base64.b64encode(data1).decode()
+
+        with open("images/quests/cab2.png", "rb") as f:
+            data2 = f.read()
+            data2_base64 = base64.b64encode(data2).decode()
+
+        with open("images/quests/button.png", "rb") as f:
+            img_button = base64.b64encode(f.read()).decode()
+
+        st.markdown(f"""
+        <div style="
+            display: flex;
+            justify-content: center;   /* centraliza horizontalmente */
+            width: 100%;
+        ">
+            <img src="data:image/png;base64,{data2_base64}" 
+                style="
+                    width: 80%;          /* ocupa grande parte da tela */
+                    max-width: 1200px;   /* não ultrapassa 1200px */
+                    height: auto;        /* mantém proporção */
+                    border-radius: 10px;
+                ">
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br><br>", unsafe_allow_html=True)  # adiciona espaço
+
+        st.markdown(f"""
+        <div style="display: flex; align-items: center;">
+            <img src="data:image/png;base64,{data1_base64}" width="80" style="margin-right: 15px;">
+            <span style="
+                font-size: 2.6rem;       /* tamanho semelhante ao st.title */
+                font-weight: 800;         /* negrito igual ao st.title */
+                line-height: 1.2;         /* espaçamento de linha */
+                margin: 0;
+            ">
+                Questão 1 - Apostando todas as fichas
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            st.image("images/quests/imagem8.jpg", width=400)
+        
+        st.markdown("""
+        Durante o lançamento de um foguete, pequenas incertezas no ângulo, na velocidade inicial e em condições ambientais podem alterar significativamente o local de queda do foguete ou de seus estágios.
+
+        Para avaliar riscos e definir zonas de segurança, engenheiros utilizam simulações de Monte Carlo para estimar, por meio de simulação, a região mais provável de impacto, considerando incertezas nos parâmetros de lançamento.
+
+        Simulações de Monte Carlo são técnicas computacionais usadas para estimar resultados de problemas complexos por meio de experimentos aleatórios repetidos. Em vez de calcular uma solução exata por fórmulas fechadas, o método simula muitas possibilidades diferentes, utilizando números aleatórios, e analisa estatisticamente os resultados obtidos.
+        Essas simulações são especialmente úteis quando o sistema envolve incertezas, variáveis aleatórias ou comportamentos difíceis de modelar diretamente, sendo amplamente utilizadas em áreas como engenharia, física, finanças e ciência de dados.
+        
+        O nome Monte Carlo faz referência ao famoso distrito de cassinos em Mônaco. A analogia vem do fato de que o método se baseia em sorteios aleatórios, assim como apostas em jogos de azar. Assim como em um cassino, quanto maior o número de “apostas” (simulações realizadas), mais confiável tende a ser a estimativa final.
+                    
+        Neste exercício, você deverá simular uma série de lançamentos e estimar a distribuição dos possíveis raios de quedado foguete, para ajudar a determinar a probabilidade de onde iremos encontrar o mesmo na hora da recuperação. Para simplificar, todas as fórmulas e constantes necessárias são fornecidas: a aceleração da gravidade é constante, g = 9.8 m/s², e o alcance horizontal do foguete é calculado por
+        """)
+        
+        st.markdown(r"""
+        $$
+        R = \frac{v^2 \cdot \sin(2\theta)}{g}
+        $$
+        """)
+        st.markdown("""
+        em que v é a velocidade inicial do foguete e θ é o ângulo de lançamento em radianos (a funçao de conversao para radianos já será dada).
+
+        Os valores utilizados em cada simulação variam de forma aleatória e uniforme dentro dos seguintes intervalos:
+
+                    
+        """)
+        st.markdown(r"""
+        $$
+        \begin{aligned}
+        v &\in [v_0 - \Delta v,\; v_0 + \Delta v] \\
+        \theta &\in [\theta_0 - \Delta \theta,\; \theta_0 + \Delta \theta]
+        \end{aligned}
+        $$
+        """)
+
+        st.markdown("""
+        O programa deve ler:
+        """)
+        
+        st.markdown(r"""
+        - **N**: número de simulações  
+        - **v₀**: velocidade nominal *(m/s)*  
+        - **Δv**: variação máxima da velocidade *(m/s)*  
+        - **θ₀**: ângulo nominal *(graus)*  
+        - **Δθ**: variação máxima do ângulo *(graus)*  
+        - **K**: número de regiões para análise da distribuição  
+        """)
+
+        st.markdown("""
+        Sendo assim, monte um programa que:
+        """)
+
+        st.markdown(r"""
+        1. Simule **N** lançamentos do foguete (o N sendo de sua escolha), gerando aleatoriamente os valores de **$v$** e **$\theta$** dentro de intervalos fornecidos (também à sua escolha), e calcule o raio de queda **$R$** de cada lançamento.
+        2. Determine o menor e o maior valor de **$R$** obtidos na simulação, denotados por **$R_{\min}$** e **$R_{\max}$**.
+        3. Divida o intervalo **$[R_{\min}, R_{\max}]$** em **K** regiões consecutivas de mesmo tamanho (escolha bem o valor de K).
+        4. Conte quantos lançamentos caíram em cada região e estime a probabilidade de queda em cada uma delas como a proporção de lançamentos que ocorreram na respectiva região.
+        5. Apresente os resultados de forma textual, mostrando para cada região:
+            - intervalo da região  
+            - quantidade de lançamentos  
+            - probabilidade de queda *(em percentual)*  
+        """)
+
+        st.markdown("""Exemplo:""")
+        st.code(
+        """Exemplo de entrada:
+N = 1000
+v0 = 50
+Δv = 5
+θ0 = 45
+Δθ = 5
+K = 5
+
+Exemplo de saída possível:
+Raio mínimo: 199 m
+Raio máximo: 258 m
+
+Região 1 [199 - 210]: 95 lançamentos (9.5%)
+Região 2 [210 - 222]: 210 lançamentos (21.0%)
+Região 3 [222 - 234]: 320 lançamentos (32.0%)
+Região 4 [234 - 246]: 240 lançamentos (24.0%)
+Região 5 [246 - 258]: 135 lançamentos (13.5%)
+        """,
+        language="text"
+        )
+        st.caption(
+        "Os números acima são ilustrativos. "
+        "Seus resultados podem variar devido à natureza aleatória da simulação."
+        )
+
+        st.markdown("**Para a funçao de conversao para radianos, você pode usar a função abaixo:**")
+        st.markdown(
+            """
+            <style>
+            .streamlit-expanderHeader, .streamlit-expanderContent {
+                font-family: "Fira Code", monospace;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+        st.code(rad_code, language="cpp")
+
+        st.markdown("<br><br>", unsafe_allow_html=True)  # adiciona espaço
+
+        st.markdown(f"""
+        <div style="display: flex; align-items: center;">
+            <img src="data:image/png;base64,{data1_base64}" width="80" style="margin-right: 15px;">
+            <span style="
+                font-size: 2.6rem;       /* tamanho semelhante ao st.title */
+                font-weight: 800;         /* negrito igual ao st.title */
+                line-height: 1.2;         /* espaçamento de linha */
+                margin: 0;
+            ">
+                Questão 2 - De olhos bem abertos
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            st.image("images/quests/imagem9.png", width=400)
+
+        st.markdown("""
+        Um drone que monitora plantações envia imagens da superfície terrestre para análise de vegetação. Cada imagem colorida é capturada em três canais: vermelho (R), verde (G) e azul (B). Para que o computador possa processar os dados, cada canal da imagem é transformado em uma matriz de números inteiros, onde cada elemento representa a intensidade do pixel naquele canal, variando de 0 (intensidade mínima) a 255 (intensidade máxima). Sendo assim, a “sobreposição” dos canais é o que gera a imagem final que vemos em nossos computadores.
+        
+        Cada pixel da imagem pode representar terra, água ou vegetação.
+        
+        Assim, cada imagem colorida é representada por três matrizes do mesmo tamanho, correspondendo aos canais R, G e B. Com essas matrizes, é possível analisar as cores de cada pixel individualmente e identificar regiões de interesse, como áreas de vegetação saudável, diferenciando-as de terra nua, água ou áreas degradadas.
+""")
+        
+        col1, col2, col3 = st.columns([1, 4, 1])
+        with col2:
+            st.image("images/quests/imagem10.png", width=700)
+
+        st.markdown("""
+        Para analisar a saúde e a produtividade das plantações, engenheiros precisam identificar os pixels que representam plantas, definidos por valores de intensidade dentro de um limiar para cada canal:
+        """)
+
+        st.markdown(r"""
+        $$
+        \begin{aligned}
+        Rmin ≤ R ≤ Rmax \\
+        Gmin ≤ G ≤ Gmax \\
+        Bmin ≤ B ≤ Bmax
+        \end{aligned}
+        $$
+        """)
+
+        st.markdown("""
+        Um pixel que atende a essas três condições é considerado como representando vegetação relevante. Além disso, os pixels com maior intensidade total (R+G+B) indicam regiões potencialmente mais saudáveis ou produtivas, que devem ser priorizadas para análise.
+        """)
+
+        st.markdown("""
+        Sendo assim, monte um programa que:
+        """)
+
+        st.markdown(r"""
+        1. Percorre todas as matrizes e identifica os pixels que representam plantas, dentro do limiar definido.
+        2. Armazena as posições (linha e coluna) desses pixels.
+        3. Ao final, apresente:
+            - Quantidade de pixels de plantação encontrados
+            - Pixel mais intenso (maior soma R+G+B)
+            - Top-K pixels mais intensos, em ordem decrescente de intensidade, indicando linha, coluna e intensidade         
+        4. Receba nas entradas:
+            - M, N: dimensões da imagem
+            - Limiares: Rmin, Rmax, Gmin, Gmax, Bmin, Bmax
+            - K: número de pixels mais intensos a retornar                  
+        5. Mostre na saída:
+            - Total de pixels que representam plantas
+            - Coordenadas do pixel mais intenso e sua intensidade
+            - Lista dos top-K pixels mais intensos com coordenadas e intensidade
+                    
+        **Dica:** como as matrizes já são passadas, você pode já guardar direto no programa, para evitar ter que passar na entrada (e perder tempo nos testes).
+        """)
+
+        st.markdown("""Exemplo:""")
+        st.code(
+        """Exemplo simplificado (3x3)
+Matrizes:
+R = [[10, 200, 50],
+     [30, 100, 255],
+     [0,  50,  75]]
+
+G = [[5,  180, 60],
+     [40, 120, 250],
+     [10, 45,  80]]
+
+B = [[0,  150, 70],
+     [35, 110, 245],
+     [5,  50,  60]]
+
+Limiares:
+R: 50–255
+G: 50–200
+B: 50–255
+K = 2
+
+Processamento:
+Pixels dentro do limiar:
+(0,1): 200+180+150 = 530
+(1,2): 255+250+245 = 750
+
+Saída esperada:
+Total de pixels de plantação: 2
+Pixel mais intenso: (1,2) intensidade 750
+Top 2 pixels mais intensos:
+1: (1,2) intensidade 750
+2: (0,1) intensidade 530
+        """,
+        language="text"
+        )
+        st.caption(
+        "Os resultados acima são ilustrativos. "
+        "Seus resultados podem variar devido à natureza aleatória dos dados e limiares."
+        )
+
+        st.markdown("**As informações acerca dos limiares, bem como as matrizes, se encontram no .txt abaixo:**")
+        col1, col2, col3 = st.columns([1, 10, 10])
+        with col2:
+            #st.image("images/quests/button.png", width=200)
+            st.markdown(
+                f"""
+                <a href="{"https://drive.google.com/file/d/1ZMe09lXoNOuX7kf6jquzeqc-N8H_3gT7/view?usp=share_link"}" target="_blank">
+                    <img src="data:image/png;base64,{img_button}" 
+                        width="200" 
+                        style="
+                            cursor: pointer;
+                            border-radius: 20px;  
+                        ">
+                </a>
+                """,
+                unsafe_allow_html=True
+            )
+
     else:
         st.markdown("# Atividades Semanais - Semana 3")
         st.markdown("### :cry: Por enquanto aqui está vazio")
