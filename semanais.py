@@ -3,6 +3,127 @@ import streamlit as st
 from streamlit_ace import st_ace
 import base64
 
+zarya_code = """
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+// ------------------------------------------------------------
+// Constante do número de amostras
+// ------------------------------------------------------------
+const int N = 150;
+
+// ------------------------------------------------------------
+// Função para ler o arquivo de dados do satélite e armazenar
+// cada coluna em um vetor diferente para trabalhar.
+//
+// Retorna true se a leitura bem-sucedida, e false se tiver 
+// erro ao abrir ou ler o arquivo
+// ------------------------------------------------------------
+bool carregarDadosCSV(
+    const string& nomeArquivo,
+    int time_step[],
+    double altitude[],
+    double velocity[],
+    double temperature[],
+    double power[],
+    int tamanho
+) {
+    ifstream arquivo(nomeArquivo);
+
+    if (!arquivo.is_open()) {
+        return false;
+    }
+
+    string linha;
+
+    // Ignora o cabeçalho
+    getline(arquivo, linha);
+
+    int i = 0;
+
+    while (getline(arquivo, linha) && i < tamanho) {
+        stringstream ss(linha);
+        string campo;
+
+        getline(ss, campo, '\t');
+        time_step[i] = stoi(campo);
+
+        getline(ss, campo, '\t');
+        altitude[i] = stod(campo);
+
+        getline(ss, campo, '\t');
+        velocity[i] = stod(campo);
+
+        getline(ss, campo, '\t');
+        temperature[i] = stod(campo);
+
+        getline(ss, campo, '\t');
+        power[i] = stod(campo);
+
+        i++;
+    }
+
+    arquivo.close();
+    return true;
+}
+
+int main() {
+
+    int time_step[N];
+    double altitude[N];
+    double velocity[N];
+    double temperature[N];
+    double power[N];
+
+    double altitude_filtrada[N];
+    double velocity_filtrada[N];
+    double temperature_filtrada[N];
+    double power_filtrada[N];
+
+    // ------------------------------------------------------------
+    // Leitura dos dados do CSV do Zarya; como a função retorna
+    // true ou false para o sucesso da operação, essa "resposta""
+    // é guardada na variável "carregamento". Se tivermos sucesso,
+    // printa "Sucesso ao carregar o arquivo de dados.", senão
+    // printa "Erro ao carregar o arquivo de dados." e retorna um
+    // número de erro (neste caso, 1) para encerrar o programa.
+    // ------------------------------------------------------------
+    bool carregamento = carregarDadosCSV("Zarya.csv",
+                                time_step,
+                                altitude,
+                                velocity,
+                                temperature,
+                                power,
+                                N);
+
+    if (!carregamento) {
+        cout << "Erro ao carregar o arquivo de dados." << endl;
+        return 1;
+    } else {
+        cout << "Sucesso ao carregar o arquivo de dados." << endl;
+    }
+
+    // ------------------------------------------------------------
+    // A partir daqui, você deve aplicar o filtro nos vetores que
+    // guardam os dados (sugiro que crie uma função para o filtro),
+    // guarde as leituras filtradas nos vetores "_filtrada", 
+    // verifique a estabilidade (se de um dado pro outro não 
+    // tiveram grandes saltos de valores, na qual sinta-se livre
+    // pra julgar o que é um salto grande), e ao final, retorne as
+    // colunas (altitude, velocidade, etc) que ficaram estaveis e 
+    // não estaveis.
+    // ------------------------------------------------------------
+
+    return 0;
+}
+
+"""
+
+
 randvec_code = """
 #include <iostream>   // Biblioteca para entrada e saída (cout, endl)
 #include <cstdlib>    // Biblioteca que fornece rand() e srand()
@@ -229,7 +350,7 @@ def semanais():
         - Justificativa lógica para a construção da linha, evitando conexões longas e trechos pouco utilizados.
 
         Você deve escrever um programa que auxilie na criação de um mapa de linhas recomendadas para expansão, considerando as informações fornecidas pela prefeitura.
-        Os dados necessários para resolver o problema já estarão embutidos no código. Você contará com uma lista de 20 bairros, cada um acompanhado de uma pontuação de viabilidade entre 0 e 100, sendo permitida a construção de estações apenas nos bairros cuja pontuação seja igual ou superior a 70. Além disso, será fornecida uma matriz de distâncias entre os bairros, com valores que variam de 0 a 20, onde 0 indica ausência de ligação direta e valores maiores representam bairros mais afastados; considere como viáveis apenas as conexões cuja distância seja menor ou igual a 10. Por fim, cada bairro também possui informações sobre os três destinos mais desejados pelos seus moradores, obtidos por meio de pesquisa populacional; se um bairro “A” deseja se deslocar até “B”, essa demanda aumenta a relevância da conexão entre eles.
+        Os dados necessários para resolver o problema se encontram no txt ao final do enunciado. Você contará com uma lista de 20 bairros, cada um acompanhado de uma pontuação de viabilidade entre 0 e 100, sendo permitida a construção de estações apenas nos bairros cuja pontuação seja igual ou superior a 70. Além disso, será fornecida uma matriz de distâncias entre os bairros, com valores que variam de 0 a 20, onde 0 indica ausência de ligação direta e valores maiores representam bairros mais afastados; considere como viáveis apenas as conexões cuja distância seja menor ou igual a 10. Por fim, cada bairro também possui informações sobre os três destinos mais desejados pelos seus moradores, obtidos por meio de pesquisa populacional; se um bairro “A” deseja se deslocar até “B”, essa demanda aumenta a relevância da conexão entre eles.
 
         #### Você deve implementar um programa que:
         1. Identifique todos os bairros viáveis (pontuação ≥ 70).
@@ -274,6 +395,7 @@ def semanais():
                 unsafe_allow_html=True
             )
 
+        st.markdown("**Dica: armazene as informações dos bairros em VETORES OU MATRIZES, para facilitar o acesso aos dados, armazenando de uma forma que fique melhor para você trabalhar os mesmos. Não se preocupe com leitura de arquivo aqui, pois não é muito útil (caso fosse, eu também passaria a função que faz isso para não adicionar uma barreira de dificuldade desnecessária).**")
         
         st.markdown("<br><br>", unsafe_allow_html=True)  # adiciona espaço
 
@@ -342,6 +464,19 @@ O resultado final deve indicar se cada coluna está **Estável** ou **Instável*
                 """,
                 unsafe_allow_html=True
             )
+
+        st.markdown("Para você começar a trabalhar, este abaixo é o esboço inicial do código a ser desenvolvido; ele já te dá as funções básicas para trabalhar. Parta deste código como base.")
+        st.markdown(
+            """
+            <style>
+            .streamlit-expanderHeader, .streamlit-expanderContent {
+                font-family: "Fira Code", monospace;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+        st.code(zarya_code, language="cpp")
 
         st.markdown("<br><br>", unsafe_allow_html=True)  # adiciona espaço
         
