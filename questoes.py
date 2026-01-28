@@ -73,9 +73,10 @@ def questao3(key=None):
     default_code_q3 = None
 
     tests_q3 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "32"),
+        ("100", "212"),
+        ("-40", "-40"),
+        ("25.5", "77.9")
     ]
 
     editor_cpp(default_code=default_code_q3, tests=tests_q3, key="q3")
@@ -127,9 +128,10 @@ def questao5(key=None):
     default_code_q5 = None
 
     tests_q5 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1 2 3", "2"),
+        ("10 20 30", "20"),
+        ("0 0 1", "0.333333"),
+        ("5 5 6", "5.33333")
     ]
 
     editor_cpp(default_code=default_code_q5, tests=tests_q5, key="q5")
@@ -154,9 +156,11 @@ Fórmula: `V = (adc * 5.0) / 1023.0`
     default_code_q6 = None
 
     tests_q6 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "0.00"),
+        ("1023", "5.00"),
+        ("512", "2.50"),
+        ("256", "1.25"),
+        ("100", "0.49")
     ]
 
     editor_cpp(default_code=default_code_q6, tests=tests_q6, key="q6")
@@ -178,9 +182,11 @@ def questao7(key=None):
     default_code_q7 = None
 
     tests_q7 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("100", "100"),
+        ("0", "0"),
+        ("255", "255"),
+        ("300", "255"),
+        ("-20", "0")
     ]
 
     editor_cpp(default_code=default_code_q7, tests=tests_q7, key="q7")
@@ -204,9 +210,11 @@ Saída: o novo valor modificado.
     default_code_q8 = None
 
     tests_q8 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "5"),
+        ("255", "219"),
+        ("32", "4"),
+        ("1", "4"),
+        ("36", "5")
     ]
 
     editor_cpp(default_code=default_code_q8, tests=tests_q8, key="q8")
@@ -232,9 +240,10 @@ Depois, escreva um programa que:
     default_code_q9 = None
 
     tests_q9 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1 100 0", "1 100 0"),
+        ("255 65535 1", "255 65535 1"),
+        ("10 500 1", "10 500 1"),
+        ("0 0 0", "0 0 0")
     ]
 
     editor_cpp(default_code=default_code_q9, tests=tests_q9, key="q9")
@@ -256,9 +265,11 @@ def questao10(key=None):
     default_code_q10 = None
 
     tests_q10 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("10 20 30 40 50", "30"),
+        ("1 1 1 1 1", "1"),
+        ("0 0 0 0 0", "0"),
+        ("5 6 7 8 9", "7"),
+        ("100 0 100 0 100", "60")
     ]
 
     editor_cpp(default_code=default_code_q10, tests=tests_q10, key="q10")
@@ -282,9 +293,11 @@ Escreva um programa que:
     default_code_q11 = None
 
     tests_q11 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("25.3", "25.3"),
+        ("0.0", "0.0"),
+        ("-10.7", "-10.7"),
+        ("36.6", "36.6"),
+        ("12.99", "12.9")
     ]
 
     editor_cpp(default_code=default_code_q11, tests=tests_q11, key="q11")
@@ -307,9 +320,11 @@ def questao12(key=None):
     default_code_q12 = None
 
     tests_q12 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "0.00"),
+        ("512", "2.50"),
+        ("920", "4.50"),
+        ("1023", "4.50"),
+        ("100", "0.49")
     ]
 
     editor_cpp(default_code=default_code_q12, tests=tests_q12, key="q12")
@@ -337,9 +352,11 @@ O programa deve:
     default_code_q13 = None
 
     tests_q13 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1 1", "1 1 2"),
+        ("10 256", "10 256 11"),
+        ("255 0", "255 0 255"),
+        ("5 1025", "5 1025 11"),
+        ("1 16909060", "1 16909060 11")
     ]
 
     editor_cpp(default_code=default_code_q13, tests=tests_q13, key="q13")
@@ -366,9 +383,11 @@ Escreva um programa que:
     default_code_q14 = None
 
     tests_q14 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "0"),
+        ("4", "1"),
+        ("255", "63"),
+        ("512", "128"),
+        ("1023", "255")
     ]
 
     editor_cpp(default_code=default_code_q14, tests=tests_q14, key="q14")
@@ -387,9 +406,11 @@ Não utilize funções prontas.
     default_code_q15 = None
 
     tests_q15 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1 2 3", "3"),
+        ("10 5 7", "10"),
+        ("-1 -2 -3", "-1"),
+        ("5 5 3", "5"),
+        ("7 7 7", "7")
     ]
 
     editor_cpp(default_code=default_code_q15, tests=tests_q15, key="q15")
@@ -413,9 +434,11 @@ Escreva usando switch.
     default_code_q16 = None
 
     tests_q16 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "INICIALIZANDO"),
+        ("1", "OPERANDO"),
+        ("2", "ERRO"),
+        ("3", "DESLIGADO"),
+        ("5", "ESTADO INVALIDO")
     ]
 
     editor_cpp(default_code=default_code_q16, tests=tests_q16, key="q16")
@@ -437,9 +460,11 @@ Trate também caracteres inválidos.
     default_code_q17 = None
 
     tests_q17 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("L", "LIGAR"),
+        ("D", "DESLIGAR"),
+        ("R", "REINICIAR"),
+        ("X", "COMANDO INVALIDO"),
+        ("l", "COMANDO INVALIDO")
     ]
 
     editor_cpp(default_code=default_code_q17, tests=tests_q17, key="q17")
@@ -461,9 +486,11 @@ def questao18(key=None):
     default_code_q18 = None
 
     tests_q18 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("100 200", "RESULTADO 300"),
+        ("65535 0", "RESULTADO 65535"),
+        ("65535 1", "OVERFLOW"),
+        ("60000 5535", "OVERFLOW"),
+        ("0 65535", "RESULTADO 65535")
     ]
 
     editor_cpp(default_code=default_code_q18, tests=tests_q18, key="q18")
@@ -494,9 +521,11 @@ Implemente usando switch e trate o default adequadamente.
     default_code_q19 = None
 
     tests_q19 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0", "MANUAL"),
+        ("1", "AUTOMÁTICO"),
+        ("2", "CALIBRAÇÃO"),
+        ("-1", "Modo inválido\nAUTOMÁTICO"),
+        ("5", "Modo inválido\nAUTOMÁTICO")
     ]
 
     editor_cpp(default_code=default_code_q19, tests=tests_q19, key="q19")
@@ -524,9 +553,11 @@ O programa deve:
     default_code_q20 = None
 
     tests_q20 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("10000 45 1 1", "10000 4.5 1 1"),
+        ("21000 45 1 1", "21000 4.5 0 0"),
+        ("15000 30 1 2", "15000 3.0 0 0"),
+        ("15000 40 0 3", "15000 4.0 0 3"),
+        ("20000 49 1 5", "20000 4.9 1 5")
     ]
 
     editor_cpp(default_code=default_code_q20, tests=tests_q20, key="q20")
@@ -548,9 +579,12 @@ def questao21(key=None):
     default_code_q21 = None
 
     tests_q21 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1\n2 + 6 - 3 =", "5.00"),
+        ("0\n10 / 3 =", "3"),
+        ("1\n10 / 4 =", "2.50"),
+        ("0\n5 / 0 =", "ERRO"),
+        ("1\n2 + 3 * 4 =", "20.00"),
+        ("1\n2 + x =", "ERRO")
     ]
 
     editor_cpp(default_code=default_code_q21, tests=tests_q21, key="q21")
@@ -569,9 +603,11 @@ O programa deve rodar utilizando um laço while() até que o sensor começe a da
     default_code_q22 = None
 
     tests_q22 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("10 20 30 -1", "10\n20\n30"),
+        ("0 5 0 -3", "0\n5\n0"),
+        ("100 -1", "100"),
+        ("-1", ""),
+        ("3 2 1 0 -5", "3\n2\n1\n0")
     ]
 
     editor_cpp(default_code=default_code_q22, tests=tests_q22, key="q22")
@@ -590,9 +626,17 @@ A cada iteração, o LED deve ligar por 500 ms e desligar por 500 ms.
     default_code_q23 = None
 
     tests_q23 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", 
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF\n"
+        "LED ON\nLED OFF")
     ]
 
     editor_cpp(default_code=default_code_q23, tests=tests_q23, key="q23")
@@ -611,9 +655,11 @@ O programa deve ler o ADC 8 vezes, somar os valores e calcular a média inteira.
     default_code_q24 = None
 
     tests_q24 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("100 100 100 100 100 100 100 100", "100"),
+        ("0 0 0 0 0 0 0 0", "0"),
+        ("10 20 30 40 50 60 70 80", "45"),
+        ("1 2 3 4 5 6 7 8", "4"),
+        ("1023 1023 1023 1023 1023 1023 1023 1023", "1023")
     ]
 
     editor_cpp(default_code=default_code_q24, tests=tests_q24, key="q24")
@@ -635,9 +681,11 @@ def questao25(key=None):
     default_code_q25 = None
 
     tests_q25 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("abc", "a\nb\nc"),
+        ("HELLO", "H\nE\nL\nL\nO"),
+        ("a", "a"),
+        ("teste123", "t\ne\ns\nt\ne\n1\n2\n3"),
+        ("Zyx", "Z\ny\nx")
     ]
 
     editor_cpp(default_code=default_code_q25, tests=tests_q25, key="q25")
@@ -659,9 +707,7 @@ Explique como o vetor permite manipulação direta de memória sem overhead de e
     default_code_q26 = None
 
     tests_q26 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "0\n4\n0\n8\n0\n12\n0\n16")
     ]
 
     editor_cpp(default_code=default_code_q26, tests=tests_q26, key="q26")
@@ -682,9 +728,12 @@ def questao27(key=None):
     default_code_q27 = None
 
     tests_q27 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0 5000 10000 12000 9999 10001 8000 15000 100 42",
+        "0\n5000\n10000\n10000\n9999\n10000\n8000\n10000\n100\n42"),
+        ("12000 12000 12000 12000 12000 12000 12000 12000 12000 12000",
+        "10000\n10000\n10000\n10000\n10000\n10000\n10000\n10000\n10000\n10000"),
+        ("0 1 2 3 4 5 6 7 8 9",
+        "0\n1\n2\n3\n4\n5\n6\n7\n8\n9")
     ]
 
     editor_cpp(default_code=default_code_q27, tests=tests_q27, key="q27")
@@ -707,20 +756,16 @@ def questao28(key=None):
 
     tests_q28 = [
         (
-        "100 102 101 103 104 102 101 100 99 98",
-        "100 102 101 103 104 102 101 100 99 98"
+            "10 12 11 50 13 14 80 15 16 17",
+            "10\n12\n11\n30\n13\n14\n48\n15\n16\n17"
         ),
-
-        # Caso 2 – Um valor ruidoso
         (
-            "100 100 100 200 100 100 100 100 100 100",
-            "100 100 100 150 100 100 100 100 100 100"
+            "100 100 100 200 100 100 100 200 100 100",
+            "100\n100\n100\n150\n100\n100\n100\n150\n100\n100"
         ),
-
-        # Caso 3 – Vários ruídos consecutivos
         (
-            "50 50 50 200 250 10 50 50 50 50",
-            "50 50 50 125 162 61 83 76 61 61"
+            "0 0 0 50 0 0 0 50 0 0",
+            "0\n0\n0\n25\n0\n0\n0\n25\n0\n0"
         )
     ]
     
@@ -742,9 +787,9 @@ No main(), leia três valores de ADC, chame a função para cada um e imprima o 
     default_code_q29 = None
 
     tests_q29 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("0 512 1023", "0\n2.50244\n5"),
+        ("1023 0 0", "5\n0\n0"),
+        ("256 512 768", "1.25122\n2.50244\n3.75367")
     ]
 
     editor_cpp(default_code=default_code_q29, tests=tests_q29, key="q29")
@@ -765,9 +810,14 @@ Mostre valores antes e depois da saturação.
     default_code_q30 = None
 
     tests_q30 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "-100 0 500 1200 1000",
+            "-100 0\n0 0\n500 500\n1200 1000\n1000 1000"
+        ),
+        (
+            "2000 -50 300 999 1001",
+            "2000 1000\n-50 0\n300 300\n999 999\n1001 1000"
+        )
     ]
 
     editor_cpp(default_code=default_code_q30, tests=tests_q30, key="q30")
@@ -786,9 +836,10 @@ No main(), preencha um vetor com 10 leituras simuladas e exiba a média resultan
     default_code_q31 = None
 
     tests_q31 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("10 10 10 10 10 10 10 10 10 10", "10"),
+        ("0 1 2 3 4 5 6 7 8 9", "4.5"),
+        ("100 200 300 400 500 600 700 800 900 1000", "550"),
+        ("1 2 3 4 5 6 7 8 9 10", "5.5")
     ]
 
     editor_cpp(default_code=default_code_q31, tests=tests_q31, key="q31")
@@ -805,12 +856,12 @@ Simule uma sequência de leituras ruidosas de botão em um vetor e exiba o valor
         """
     )
 
-    default_code_q32 = None
+    default_code_q32 = """
+bool leituras[10] = {0, 1, 0, 1, 1, 1, 0, 0, 1, 1};
+"""
 
     tests_q32 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "0\n0\n0\n0\n1\n1\n0\n1\n0\n1")
     ]
 
     editor_cpp(default_code=default_code_q32, tests=tests_q32, key="q32")
@@ -835,9 +886,10 @@ Crie um pacote no main(), calcule o checksum e exiba o resultado.
     default_code_q33 = None
 
     tests_q33 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("1 100", "101"),
+        ("10 500", "254"),
+        ("255 1", "0"),
+        ("0 0", "0")
     ]
 
     editor_cpp(default_code=default_code_q33, tests=tests_q33, key="q33")
@@ -861,9 +913,18 @@ Leia 5 valores e acione o alerta quando necessário usando os módulos.
     default_code_q34 = None
 
     tests_q34 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "10000 16000 14000 18000 20000",
+            "ALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA"
+        ),
+        (
+            "0 5000 10000 15000 15000",
+            ""
+        ),
+        (
+            "16001 16002 16003 16004 16005",
+            "ALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA\nALERTA: CORRENTE ALTA"
+        )
     ]
 
     editor_cpp(default_code=default_code_q34, tests=tests_q34, key="q34")
@@ -884,12 +945,22 @@ Simule 10 leituras aplicando o pipeline: ler → filtrar → converter.
         """
     )
 
-    default_code_q35 = None
+    default_code_q35 = "int dadosSimulados[10] = {100, 300, 600, 400, 800, 200, 1023, 500, 250, 750};"
 
     tests_q35 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+        "",
+        "0.488759\n"
+        "0.977517\n"
+        "2.19922\n"
+        "2.44379\n"
+        "2.93255\n"
+        "2.44379\n"
+        "3.50049\n"
+        "3.67605\n"
+        "1.83109\n"
+        "2.44379"
+    )
     ]
 
     editor_cpp(default_code=default_code_q35, tests=tests_q35, key="q35")
@@ -917,12 +988,49 @@ Simule a leitura de 5 pacotes de telemetria e indique quais são válidos.
         """
     )
 
-    default_code_q36 = None
+    default_code_q36 = """Telemetria dadosSimulados[5] = {
+    {12000, 45, 0x01, false},
+    {22000, 40, 0x02, false},
+    {8000,  30, 0x03, false},
+    {15000, 50, 0x04, true},
+    {10000, 42, 0x05, false}
+};
+"""
 
     tests_q36 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "",
+            "Corrente: 12000 mA\n"
+            "Tensao: 4.5 V\n"
+            "Flags: 1\n"
+            "Erro: NAO\n"
+            "Pacote VALIDO\n"
+            "-------------------\n"
+            "Corrente: 22000 mA\n"
+            "Tensao: 4 V\n"
+            "Flags: 2\n"
+            "Erro: NAO\n"
+            "Pacote INVALIDO\n"
+            "-------------------\n"
+            "Corrente: 8000 mA\n"
+            "Tensao: 3 V\n"
+            "Flags: 3\n"
+            "Erro: NAO\n"
+            "Pacote INVALIDO\n"
+            "-------------------\n"
+            "Corrente: 15000 mA\n"
+            "Tensao: 5 V\n"
+            "Flags: 4\n"
+            "Erro: SIM\n"
+            "Pacote INVALIDO\n"
+            "-------------------\n"
+            "Corrente: 10000 mA\n"
+            "Tensao: 4.2 V\n"
+            "Flags: 5\n"
+            "Erro: NAO\n"
+            "Pacote VALIDO\n"
+            "-------------------"
+        )
     ]
 
     editor_cpp(default_code=default_code_q36, tests=tests_q36, key="q36")
@@ -940,7 +1048,7 @@ Funções:
 - void imprimirBuffer(int buf[], int tamanho)
 
 O índice deve retornar a zero quando chegar ao fim.
-Insira 20 valores simulados no buffer.
+Insira 20 valores simulados (de 1 a 20) no buffer.
 
 Dica: usar operador % para "voltar ao início".
         """
@@ -949,9 +1057,10 @@ Dica: usar operador % para "voltar ao início".
     default_code_q37 = None
 
     tests_q37 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "",
+            "10 11 12 13 14 15 16 17 18 19"
+        )
     ]
 
     editor_cpp(default_code=default_code_q37, tests=tests_q37, key="q37")
@@ -976,9 +1085,10 @@ Calcule a média apenas quando houver janela completa.
     default_code_q38 = None
 
     tests_q38 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "",
+            "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18"
+        )
     ]
 
     editor_cpp(default_code=default_code_q38, tests=tests_q38, key="q38")
@@ -1007,9 +1117,43 @@ Execute cada tarefa em intervalos diferentes:
     default_code_q39 = None
 
     tests_q39 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "",
+            "Tick 1: SENSOR\n"
+            "Tick 2: SENSOR\n"
+            "Tick 2: DISPLAY\n"
+            "Tick 3: SENSOR\n"
+            "Tick 4: SENSOR\n"
+            "Tick 4: DISPLAY\n"
+            "Tick 5: SENSOR\n"
+            "Tick 5: COMUNICACAO\n"
+            "Tick 6: SENSOR\n"
+            "Tick 6: DISPLAY\n"
+            "Tick 7: SENSOR\n"
+            "Tick 8: SENSOR\n"
+            "Tick 8: DISPLAY\n"
+            "Tick 9: SENSOR\n"
+            "Tick 10: SENSOR\n"
+            "Tick 10: DISPLAY\n"
+            "Tick 10: COMUNICACAO\n"
+            "Tick 11: SENSOR\n"
+            "Tick 12: SENSOR\n"
+            "Tick 12: DISPLAY\n"
+            "Tick 13: SENSOR\n"
+            "Tick 14: SENSOR\n"
+            "Tick 14: DISPLAY\n"
+            "Tick 15: SENSOR\n"
+            "Tick 15: COMUNICACAO\n"
+            "Tick 16: SENSOR\n"
+            "Tick 16: DISPLAY\n"
+            "Tick 17: SENSOR\n"
+            "Tick 18: SENSOR\n"
+            "Tick 18: DISPLAY\n"
+            "Tick 19: SENSOR\n"
+            "Tick 20: SENSOR\n"
+            "Tick 20: DISPLAY\n"
+            "Tick 20: COMUNICACAO"
+        )
     ]
 
     editor_cpp(default_code=default_code_q39, tests=tests_q39, key="q39")
@@ -1039,9 +1183,24 @@ O resultado deve indicar quando algum sensor está fora da faixa.
     default_code_q40 = None
 
     tests_q40 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "",
+            "Ciclo 0: OK\n"
+            "Ciclo 1: OK\n"
+            "Ciclo 2: OK\n"
+            "Ciclo 3: OK\n"
+            "Ciclo 4: OK\n"
+            "Ciclo 5: OK\n"
+            "Ciclo 6: OK\n"
+            "Ciclo 7: OK\n"
+            "Ciclo 8: OK\n"
+            "Ciclo 9: OK\n"
+            "Ciclo 10: ALERTA\n"
+            "Ciclo 11: ALERTA\n"
+            "Ciclo 12: ALERTA\n"
+            "Ciclo 13: ALERTA\n"
+            "Ciclo 14: ALERTA"
+        )
     ]
 
     editor_cpp(default_code=default_code_q40, tests=tests_q40, key="q40")
@@ -1062,9 +1221,7 @@ def questao41(key=None):
 }"""
 
     tests_q41 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "")
     ]
 
     editor_cpp(default_code=default_code_q41, tests=tests_q41, key="q41")
@@ -1088,9 +1245,7 @@ def questao42(key=None):
 }"""
 
     tests_q42 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "260")
     ]
 
     editor_cpp(default_code=default_code_q42, tests=tests_q42, key="q42")
@@ -1113,9 +1268,7 @@ Entretanto, o resultado calculado está incorreto. Identifique o erro e corrija.
 }"""
 
     tests_q43 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "4.39922")
     ]
 
     editor_cpp(default_code=default_code_q43, tests=tests_q43, key="q43")
@@ -1140,9 +1293,7 @@ Explique o erro e implemente uma saturação segura para 0–255.
 }"""
 
     tests_q44 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "255")
     ]
 
     editor_cpp(default_code=default_code_q44, tests=tests_q44, key="q44")
@@ -1165,9 +1316,7 @@ Explique o problema e apresente a forma certa de manipular o registrador.
 }"""
 
     tests_q45 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        ("", "8")
     ]
 
     editor_cpp(default_code=default_code_q45, tests=tests_q45, key="q45")
@@ -1232,9 +1381,18 @@ Use `y[0] = x[0]` como caso base.
     default_code_q47 = """// filtroIIR(x, n, alpha)"""
 
     tests_q47 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "5\n100 100 100 100 100\n0.5",
+            "100"
+        ),
+        (
+            "5\n0 0 100 100 100\n0.25",
+            "57.8125"
+        ),
+        (
+            "4\n0 100 100 100\n0.8",
+            "99.2"
+        )
     ]
 
     editor_cpp(default_code=default_code_q47, tests=tests_q47, key="q47")
@@ -1258,9 +1416,18 @@ Dado um vetor de 8 leituras de temperatura, calcule o valor final `y[7]`.
     default_code_q48 = """// filtroExp(x, n, alpha)"""
 
     tests_q48 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "8\n10 10 10 10 10 10 10 10\n0.5",
+            "10"
+        ),
+        (
+            "8\n0 0 0 0 100 100 100 100\n0.25",
+            "57.8125"
+        ),
+        (
+            "8\n20 22 24 26 28 30 32 34\n0.3",
+            "30.0426"
+        )
     ]
 
     editor_cpp(default_code=default_code_q48, tests=tests_q48, key="q48")
@@ -1286,9 +1453,18 @@ Explique por que essa implementação não seria ideal em um firmware real.
     default_code_q49 = """// suaviza(x, n)"""
 
     tests_q49 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "5\n10 10 10 10 10",
+            "10"
+        ),
+        (
+            "5\n0 0 100 100 100",
+            "87.5"
+        ),
+        (
+            "6\n20 30 40 50 60 70",
+            "59.375"
+        )
     ]
 
     editor_cpp(default_code=default_code_q49, tests=tests_q49, key="q49")
@@ -1317,9 +1493,18 @@ Dica: o caso base é quando `n == 0`.
     default_code_q50 = """// aplicaRuido(v, n)"""
 
     tests_q50 = [
-        ("2", "true"),
-        ("5", "false"),
-        ("0", "true")
+        (
+            "100\n0",
+            "3.125"
+        ),
+        (
+            "0\n100",
+            "96.875"
+        ),
+        (
+            "50\n50",
+            "50"
+        )
     ]
 
     editor_cpp(default_code=default_code_q50, tests=tests_q50, key="q50")
