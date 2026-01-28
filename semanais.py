@@ -3,29 +3,6 @@ import streamlit as st
 from streamlit_ace import st_ace
 import base64
 
-# Código de rand da questão 3
-cpp_code = """
-// Inclua a biblioteca random, defina uma seed
-// Depois gere seus números com rand()
-
-#include <iostream>
-#include <random>
-
-using namespace std;
-
-int main() {
-    // Setando a seed
-    random_device rd;
-    srand(rd());
-    
-    // Rand gera números mt grandes, restrinja a um intervalo (ex.: 0 à 99)
-    int numero_aleatorio = rand() % 100; 
-    cout << "Random number: " << numero_aleatorio << endl;
-
-    return 0;
-}
-"""
-
 randvec_code = """
 #include <iostream>   // Biblioteca para entrada e saída (cout, endl)
 #include <cstdlib>    // Biblioteca que fornece rand() e srand()
