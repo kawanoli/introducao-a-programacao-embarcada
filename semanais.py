@@ -3,6 +3,280 @@ import streamlit as st
 from streamlit_ace import st_ace
 import base64
 
+fuse_code = """
+/*
+=========================================================
+ ATIVIDADE - FUSÃO DE SENSORES PARA ESTIMATIVA DE ALTURA
+=========================================================
+
+Fluxo geral do sistema:
+
+Sensores (BMP180 + MPU6050)
+        ↓
+Leitura via funções fornecidas
+        ↓
+Processamento (IMPLEMENTAÇÃO DO ALUNO)
+        ↓
+Criação de pacote de telemetria
+        ↓
+Envio para base (função fornecida)
+
+Você NÃO deve modificar:
+- readBaroHeight()
+- readAccelZ()
+- getDeltaTime()
+- sendToBase()
+
+Seu trabalho está concentrado no loop().
+*/
+
+#include <Wire.h>
+#include <Adafruit_BMP085.h>
+
+Adafruit_BMP085 bmp;
+
+// =======================================================
+// FUNÇÕES FORNECIDAS - LEITURA DOS SENSORES
+// =======================================================
+
+
+/*
+---------------------------------------------------------
+readBaroHeight()
+
+Lê o sensor BMP180 e retorna a altura em metros.
+
+Etapas internas:
+1. Lê pressão atmosférica em Pascal.
+2. Converte pressão para altura usando modelo padrão.
+3. Retorna altura estimada.
+
+IMPORTANTE:
+- O valor retornado já está em METROS.
+- É uma altura absoluta.
+- Pode ter pequenas oscilações (ruído).
+---------------------------------------------------------
+*/
+float readBaroHeight() {
+    float pressure = bmp.readPressure();
+    float seaLevel = 101325.0;  // pressão de referência
+    float height = 44330.0 * (1.0 - pow(pressure / seaLevel, 0.1903));
+    return height;
+}
+
+
+/*
+---------------------------------------------------------
+readAccelZ()
+
+Lê o eixo Z do MPU6050 via I2C.
+
+Etapas internas:
+1. Acessa registrador do eixo Z.
+2. Lê valor bruto (int16).
+3. Converte para unidade "g".
+4. Converte para m/s².
+
+IMPORTANTE:
+- O valor retornado inclui a gravidade.
+- Quando parado sobre uma mesa:
+      retorno ≈ +9.81 m/s²
+- NÃO retorna zero quando parado.
+---------------------------------------------------------
+*/
+float readAccelZ() {
+
+    // Inicia comunicação com endereço do MPU6050
+    Wire.beginTransmission(0x68);
+
+    // Registrador inicial do eixo Z
+    Wire.write(0x3F);
+
+    // Finaliza escrita, mas mantém conexão ativa
+    Wire.endTransmission(false);
+
+    // Solicita 2 bytes (eixo Z)
+    Wire.requestFrom(0x68, 2, true);
+
+    // Junta os dois bytes em um inteiro de 16 bits
+    int16_t raw = Wire.read() << 8 | Wire.read();
+
+    // Conversão para g (escala ±2g)
+    float accel = raw / 16384.0;
+
+    // Conversão para m/s²
+    return accel * 9.81;
+}
+
+
+/*
+---------------------------------------------------------
+sendToBase()
+
+Simula envio de telemetria para uma base remota.
+
+Você deve:
+- Criar uma struct
+- Preencher essa struct
+- Passar como argumento para essa função
+
+A função está em formato template para aceitar
+qualquer tipo de struct definida por você.
+---------------------------------------------------------
+*/
+template <typename T>
+void sendToBase(const T& packet) {
+    Serial.println("[TX] Enviando pacote para base...");
+}
+
+
+/*
+---------------------------------------------------------
+Controle de tempo
+
+getDeltaTime() retorna o intervalo de tempo (dt)
+em segundos entre duas execuções consecutivas do loop().
+
+Você DEVE usar esse valor para integração.
+---------------------------------------------------------
+*/
+unsigned long lastTime = 0;
+
+float getDeltaTime() {
+    unsigned long now = millis();
+    float dt = (now - lastTime) / 1000.0;
+    lastTime = now;
+    return dt;
+}
+
+
+// =======================================================
+// IMPLEMENTAÇÃO DO ALUNO
+// =======================================================
+
+/*
+---------------------------------------------------------
+A partir daqui é sua responsabilidade.
+
+Você deve:
+
+1. Criar uma struct de telemetria.
+2. Criar variáveis de estado (altura, velocidade, etc.).
+3. Definir o parâmetro alpha do filtro complementar.
+
+Dica:
+As variáveis de estado precisam manter valor entre
+iterações do loop(), portanto NÃO devem ser locais.
+---------------------------------------------------------
+*/
+
+// TODO: Definir struct de telemetria
+
+// TODO: Definir variáveis de estado globais
+// Exemplo:
+// float altura_estimada = 0.0;
+// float velocidade_estimada = 0.0;
+
+// TODO: Definir alpha (0 < alpha < 1)
+
+
+
+void setup() {
+
+    Serial.begin(115200);
+
+    // Inicializa comunicação I2C
+    Wire.begin();
+
+    // Inicializa BMP180
+    bmp.begin();
+
+    // Inicializa controle de tempo
+    lastTime = millis();
+}
+
+
+
+void loop() {
+
+    /*
+    -----------------------------------------------------
+    ETAPA 1 - LEITURA DOS SENSORES
+    -----------------------------------------------------
+    */
+
+    float baroHeight = readBaroHeight();
+    float accelZ = readAccelZ();
+    float dt = getDeltaTime();
+
+
+    /*
+    -----------------------------------------------------
+    A partir daqui começa a sua implementação.
+
+    Você tem acesso a:
+
+    baroHeight → altura absoluta em metros
+    accelZ     → aceleração em m/s² (inclui gravidade)
+    dt         → intervalo de tempo em segundos
+
+    -----------------------------------------------------
+    ETAPA 2 - PROCESSAMENTO
+    -----------------------------------------------------
+
+    Você deve:
+
+    1. Tratar o sinal de aceleração
+    2. Integrar para obter velocidade
+    3. Integrar novamente para obter altura integrada
+    4. Aplicar filtro complementar
+
+    Perguntas que devem guiar sua implementação:
+
+    - Se o sistema estiver parado, a velocidade deve crescer?
+    - Se integrar diretamente accelZ, o que acontece?
+    - Qual parte do sinal representa apenas movimento?
+
+    -----------------------------------------------------
+    */
+
+    // TODO: Remover efeito da gravidade da aceleração
+
+    // TODO: Integrar aceleração → velocidade
+
+    // TODO: Integrar velocidade → altura integrada
+
+    // TODO: Aplicar filtro complementar
+    // h_estimada = alpha * h_integrada + (1 - alpha) * baroHeight;
+
+
+    /*
+    -----------------------------------------------------
+    ETAPA 3 - TELEMETRIA
+    -----------------------------------------------------
+
+    Agora você deve:
+
+    1. Criar uma variável do tipo da sua struct.
+    2. Preencher os campos que considerar relevantes.
+    3. Enviar para a base usando sendToBase().
+
+    -----------------------------------------------------
+    */
+
+    // TODO: Criar variável packet
+
+    // TODO: Preencher packet com os dados
+
+    // TODO: Enviar com:
+    // sendToBase(packet);
+
+
+    delay(10);
+}
+
+"""
+
 zarya_code = """
 #include <iostream>
 #include <fstream>
@@ -690,8 +964,184 @@ Região 5 [246 - 258]: 135 lançamentos (13.5%)
 
 
     else:
-        st.markdown("# Atividades Semanais - Semana 3")
-        st.markdown("### :cry: Por enquanto aqui está vazio")
+        with open("images/timbu.png", "rb") as f:
+            data1 = f.read()
+            data1_base64 = base64.b64encode(data1).decode()
+
+        with open("images/quests/cab3.png", "rb") as f: 
+            data2 = f.read()
+            data2_base64 = base64.b64encode(data2).decode()
+
+        with open("images/quests/button.png", "rb") as f:
+            img_button = base64.b64encode(f.read()).decode()
+
+        st.markdown(f"""
+        <div style="
+            display: flex;
+            justify-content: center;   /* centraliza horizontalmente */
+            width: 100%;
+        ">
+            <img src="data:image/png;base64,{data2_base64}" 
+                style="
+                    width: 80%;          /* ocupa grande parte da tela */
+                    max-width: 1200px;   /* não ultrapassa 1200px */
+                    height: auto;        /* mantém proporção */
+                    border-radius: 10px;
+                ">
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br><br>", unsafe_allow_html=True)  # adiciona espaço
+
+        st.markdown(f"""
+        <div style="display: flex; align-items: center;">
+            <img src="data:image/png;base64,{data1_base64}" width="80" style="margin-right: 15px;">
+            <span style="
+                font-size: 2.6rem;       /* tamanho semelhante ao st.title */
+                font-weight: 800;         /* negrito igual ao st.title */
+                line-height: 1.2;         /* espaçamento de linha */
+                margin: 0;
+            ">
+                Questão 1 - Fusão de Sensores para Estimativa de Altura
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            st.image("images/quests/imagem13.jpg", width=400)
+        
+        st.markdown("""
+
+# Fusão de Sensores
+
+A fusão de sensores é uma técnica amplamente utilizada em sistemas embarcados para combinar medições provenientes de diferentes sensores com o objetivo de obter estimativas mais precisas, estáveis e robustas de uma determinada variável física.
+
+Historicamente, técnicas de fusão de sensores ganharam grande importância em aplicações aeroespaciais e de navegação inercial, onde sistemas como aeronaves, foguetes e satélites precisavam estimar posição, velocidade e orientação combinando sensores com características distintas — alguns mais estáveis, outros mais rápidos.
+
+Hoje, essas técnicas estão presentes em drones, smartphones, robôs móveis, veículos autônomos e sistemas industriais.
+
+Nesta atividade, você implementará um sistema simplificado de fusão de sensores para estimar altura vertical utilizando um filtro complementar.
+
+## Descrição Geral
+
+O sistema utilizará dois sensores conectados via I2C:
+
+- **BMP180** – responsável por fornecer pressão atmosférica, a partir da qual é calculada a altura.
+- **MPU6050** – responsável por fornecer aceleração linear nos três eixos.
+
+A leitura dos sensores já está implementada no código base, utilizando:
+
+- Biblioteca Adafruit BMP085/BMP180  
+- Biblioteca Wire  
+
+Também será fornecida uma função `sendToBase(...)`, que simula o envio de telemetria para uma base remota.
+
+Sua responsabilidade é implementar o processamento intermediário entre a leitura dos sensores e o envio dos dados.
+
+## Objetivo
+
+Estimar a altura vertical do sistema combinando:
+
+- A altura medida pelo barômetro (medição absoluta, porém com ruído e menor frequência de resposta).
+- A aceleração vertical medida pelo acelerômetro (medição de alta frequência, porém sujeita a ruído e deriva após integração).
+
+A estimativa final deverá ser obtida por meio de um filtro complementar.
+
+## O Filtro Complementar
+
+O filtro complementar é uma técnica simples de fusão que combina dois sinais explorando as características complementares de cada um.
+
+A estrutura geral do filtro é:
+        """)
+
+        st.markdown(r"""
+        $$
+        h_estimada = α · h_integrada + (1 − α) · h_baro
+        $$
+        """)
+
+        st.markdown(""""
+Onde:
+
+- `h_integrada` é a altura obtida por integração da aceleração.
+- `h_baro` é a altura medida pelo barômetro.
+- `α` é um coeficiente entre 0 e 1.
+
+### Interpretação física:
+
+- Valores maiores de `α` dão mais peso à estimativa dinâmica (aceleração integrada), resultando em resposta mais rápida.
+- Valores menores de `α` dão mais peso ao barômetro, resultando em maior estabilidade e menor deriva.
+
+O valor de `α` deve ser escolhido e justificado.
+
+## Informações Importantes Sobre os Sensores
+
+### Barômetro – BMP180
+
+O barômetro mede pressão atmosférica. A partir dessa pressão, o código fornecido já calcula a altura utilizando um modelo padrão de atmosfera.
+
+Isso significa que:
+
+- A função `readBaroHeight()` já retorna a altura em metros.
+- Você não precisa converter pressão para altura.
+- O valor retornado representa uma estimativa direta da altura em relação ao nível de referência adotado no código.
+- O sinal pode apresentar pequenas oscilações mesmo quando o sistema está parado (ruído natural do sensor).
+- Se o sistema estiver parado sobre uma mesa, por exemplo, a altura retornada deve permanecer aproximadamente constante, variando apenas levemente devido ao ruído.
+
+### Acelerômetro – MPU6050
+
+O acelerômetro mede aceleração específica. Esse conceito é importante.
+
+O que isso significa na prática?
+
+Quando o sensor está parado sobre uma superfície horizontal, ele não retorna zero.
+
+Ele retorna aproximadamente:
+
++9.81 m/s² no eixo vertical.
+
+Por quê?
+
+Porque o sensor mede a acelação da gravidade. Mesmo parado, ele “sente” a força da gravidade atuando sobre ele.
+
+Portanto:
+
+Valor medido = aceleração do movimento + gravidade
+
+Se o sistema estiver parado:
+
+aceleração do movimento = 0  
+valor medido ≈ +9.81 m/s²  
+
+Se o sistema estiver subindo com aceleração de +1 m/s²:
+
+valor medido ≈ 9.81 + 1 = 10.81 m/s²  
+
+Se estiver descendo acelerando:
+
+valor medido será menor que 9.81 m/s².
+
+Com base nas informações acima, você deverá pegar os dados que estao sendo recebidos pelos sensores, e realizar a fusão de sensores, para que os sensores sejam enviados de uma vez pela funcao SendToBase:
+                    
+        """)
+
+        st.markdown(r"""
+        $$
+        sendToBase(packet);
+        $$
+        """)
+
+        st.markdown("""
+
+A função `sendToBase` já está implementada e simula o envio de telemetria em um sistema real. Você deve utilizá-la exatamente como fornecida.
+
+Abaixo é fornecido o código base para você começar os trabalhos. Não modifique as funções fornecidas de leitura nem a função de envio, pois não é necessário aqui; considerando que é uma emulação do cenário real, as mesmas servem para simular o cenário.
+        """)
+
+        st.code(fuse_code, language="cpp")
+
+
 
 
 
