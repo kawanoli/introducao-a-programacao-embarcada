@@ -153,7 +153,7 @@ float getDeltaTime() {
 
 
 // =======================================================
-// SUAIMPLEMENTAÇÃO
+// SUA IMPLEMENTAÇÃO
 // =======================================================
 
 /*
@@ -992,11 +992,11 @@ Região 5 [246 - 258]: 135 lançamentos (13.5%)
 
 A fusão de sensores é uma técnica amplamente utilizada em sistemas embarcados para combinar medições provenientes de diferentes sensores com o objetivo de obter estimativas mais precisas, estáveis e robustas de uma determinada variável física.
 
-Historicamente, técnicas de fusão de sensores ganharam grande importância em aplicações aeroespaciais e de navegação inercial, onde sistemas como aeronaves, foguetes e satélites precisavam estimar posição, velocidade e orientação combinando sensores com características distintas — alguns mais estáveis, outros mais rápidos.
+Historicamente, técnicas de fusão de sensores ganharam grande importância em aplicações aeroespaciais e de navegação inercial, onde sistemas como aeronaves, foguetes e satélites precisavam estimar posição, velocidade e orientação combinando sensores com características distintas (alguns mais estáveis, outros beeem mais rápidos).
 
 Hoje, essas técnicas estão presentes em drones, smartphones, robôs móveis, veículos autônomos e sistemas industriais.
 
-Nesta atividade, você implementará um sistema simplificado de fusão de sensores para estimar altura vertical utilizando um filtro complementar.
+Nesta atividade, você implementará um sistema simplificado de fusão de sensores para estimar altura vertical utilizando um filtro complementar para isso.
 
 O sistema utilizará dois sensores conectados via I2C:
 
@@ -1014,23 +1014,23 @@ Sua responsabilidade é implementar o processamento intermediário entre a leitu
 
 ### Seu objetivo então é:
 
-Estimar a altura vertical do sistema combinando
+Estimar a altura vertical do sistema combinando (com Sensor Fuse) as leituras dos sensores do mesmo:
 
-- A altura medida pelo barômetro (medição absoluta, porém com ruído e menor frequência de resposta).
-- A aceleração vertical medida pelo acelerômetro (medição de alta frequência, porém sujeita a ruído e deriva após integração).
+- A altura medida pelo barômetro BMP180 (medição absoluta, porém com ruído e menor frequência de resposta).
+- A aceleração vertical medida pelo acelerômetro MPU6050 (medição de alta frequência, porém sujeita a ruído e deriva após integração).
 
-A estimativa final deverá ser obtida por meio de um filtro complementar.
+Onde a estimativa final deverá ser obtida por meio de um filtro complementar; e enviar por meio da funcão de envio os dados empacotados para a base, enviando um só pacote de uma vez.
 
 #### O Filtro Complementar
 
-O filtro complementar é uma técnica simples de fusão que combina dois sinais explorando as características complementares de cada um.
+Para o Sensor Fuse, vocês devem utilizar um filtro complementar. O filtro complementar é uma técnica simples de fusão que combina dois sinais explorando as características complementares de cada um.
 
 A estrutura geral do filtro é:
         """)
 
         st.markdown(r"""
         $$
-        h_estimada = α · h_integrada + (1 − α) · h_baro
+        h_estimada = α · h_(integrada) + (1 − α) · h_(baro)
         $$
         """)
 
@@ -1041,16 +1041,14 @@ Onde:
 - `h_baro` é a altura medida pelo barômetro.
 - `α` é um coeficiente entre 0 e 1.
 
-### Interpretação física:
+O valor de `α` deve ser escolhido então por você, com base em seus critérios, e justificado/explicado.
 
 - Valores maiores de `α` dão mais peso à estimativa dinâmica (aceleração integrada), resultando em resposta mais rápida.
 - Valores menores de `α` dão mais peso ao barômetro, resultando em maior estabilidade e menor deriva.
 
-O valor de `α` deve ser escolhido e justificado.
+### Informações Importantes Sobre os Sensores
 
-## Informações Importantes Sobre os Sensores
-
-### Barômetro – BMP180
+#### Barômetro – BMP180
 
 O barômetro mede pressão atmosférica. A partir dessa pressão, o código fornecido já calcula a altura utilizando um modelo padrão de atmosfera.
 
@@ -1062,38 +1060,40 @@ Isso significa que:
 - O sinal pode apresentar pequenas oscilações mesmo quando o sistema está parado (ruído natural do sensor).
 - Se o sistema estiver parado sobre uma mesa, por exemplo, a altura retornada deve permanecer aproximadamente constante, variando apenas levemente devido ao ruído.
 
-### Acelerômetro – MPU6050
+#### Acelerômetro – MPU6050
 
 O acelerômetro mede aceleração específica. Esse conceito é importante.
 
 O que isso significa na prática?
 
-Quando o sensor está parado sobre uma superfície horizontal, ele não retorna zero.
-
-Ele retorna aproximadamente:
+Quando o sensor está parado sobre uma superfície horizontal, ele não retorna zero. Ele retorna aproximadamente:
 
 +9.81 m/s² no eixo vertical.
 
-Por quê?
-
-Porque o sensor mede a acelação da gravidade. Mesmo parado, ele “sente” a força da gravidade atuando sobre ele.
+Por quê? Porque o sensor mede a acelação da gravidade. Mesmo parado, ele “sente” a força da gravidade atuando sobre ele.
 
 Portanto:
+        """)
 
-Valor medido = aceleração do movimento + gravidade
+        st.markdown(r"""
+        $$
+        Valor medido = aceleração do movimento + gravidade
+        $$
+        """)
 
+        st.markdown("""
 Se o sistema estiver parado:
 
-aceleração do movimento = 0  
-valor medido ≈ +9.81 m/s²  
+- aceleração do movimento = 0  
+- valor medido ≈ +9.81 m/s²  
 
 Se o sistema estiver subindo com aceleração de +1 m/s²:
 
-valor medido ≈ 9.81 + 1 = 10.81 m/s²  
+- valor medido ≈ 9.81 + 1 = 10.81 m/s²  
 
 Se estiver descendo acelerando:
 
-valor medido será menor que 9.81 m/s².
+- valor medido será menor que 9.81 m/s².
 
 Com base nas informações acima, você deverá pegar os dados que estao sendo recebidos pelos sensores, e realizar a fusão de sensores, para que os sensores sejam enviados de uma vez pela funcao SendToBase:
                     
