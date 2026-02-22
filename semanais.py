@@ -15,7 +15,7 @@ Sensores (BMP180 + MPU6050)
         ↓
 Leitura via funções fornecidas
         ↓
-Processamento (IMPLEMENTAÇÃO DO ALUNO)
+Processamento (Aqui é a sua implementação)
         ↓
 Criação de pacote de telemetria
         ↓
@@ -121,7 +121,9 @@ Você deve:
 - Passar como argumento para essa função
 
 A função está em formato template para aceitar
-qualquer tipo de struct definida por você.
+qualquer tipo de struct definida por você, de modo
+a não depender de uma eventual "passagem de nome igual"
+para a função.
 ---------------------------------------------------------
 */
 template <typename T>
@@ -151,7 +153,7 @@ float getDeltaTime() {
 
 
 // =======================================================
-// IMPLEMENTAÇÃO DO ALUNO
+// SUAIMPLEMENTAÇÃO
 // =======================================================
 
 /*
@@ -169,15 +171,6 @@ As variáveis de estado precisam manter valor entre
 iterações do loop(), portanto NÃO devem ser locais.
 ---------------------------------------------------------
 */
-
-// TODO: Definir struct de telemetria
-
-// TODO: Definir variáveis de estado globais
-// Exemplo:
-// float altura_estimada = 0.0;
-// float velocidade_estimada = 0.0;
-
-// TODO: Definir alpha (0 < alpha < 1)
 
 
 
@@ -240,15 +233,6 @@ void loop() {
     -----------------------------------------------------
     */
 
-    // TODO: Remover efeito da gravidade da aceleração
-
-    // TODO: Integrar aceleração → velocidade
-
-    // TODO: Integrar velocidade → altura integrada
-
-    // TODO: Aplicar filtro complementar
-    // h_estimada = alpha * h_integrada + (1 - alpha) * baroHeight;
-
 
     /*
     -----------------------------------------------------
@@ -263,13 +247,6 @@ void loop() {
 
     -----------------------------------------------------
     */
-
-    // TODO: Criar variável packet
-
-    // TODO: Preencher packet com os dados
-
-    // TODO: Enviar com:
-    // sendToBase(packet);
 
 
     delay(10);
@@ -1013,8 +990,6 @@ Região 5 [246 - 258]: 135 lançamentos (13.5%)
         
         st.markdown("""
 
-# Fusão de Sensores
-
 A fusão de sensores é uma técnica amplamente utilizada em sistemas embarcados para combinar medições provenientes de diferentes sensores com o objetivo de obter estimativas mais precisas, estáveis e robustas de uma determinada variável física.
 
 Historicamente, técnicas de fusão de sensores ganharam grande importância em aplicações aeroespaciais e de navegação inercial, onde sistemas como aeronaves, foguetes e satélites precisavam estimar posição, velocidade e orientação combinando sensores com características distintas — alguns mais estáveis, outros mais rápidos.
@@ -1022,8 +997,6 @@ Historicamente, técnicas de fusão de sensores ganharam grande importância em 
 Hoje, essas técnicas estão presentes em drones, smartphones, robôs móveis, veículos autônomos e sistemas industriais.
 
 Nesta atividade, você implementará um sistema simplificado de fusão de sensores para estimar altura vertical utilizando um filtro complementar.
-
-## Descrição Geral
 
 O sistema utilizará dois sensores conectados via I2C:
 
@@ -1039,16 +1012,16 @@ Também será fornecida uma função `sendToBase(...)`, que simula o envio de te
 
 Sua responsabilidade é implementar o processamento intermediário entre a leitura dos sensores e o envio dos dados.
 
-## Objetivo
+### Seu objetivo então é:
 
-Estimar a altura vertical do sistema combinando:
+Estimar a altura vertical do sistema combinando
 
 - A altura medida pelo barômetro (medição absoluta, porém com ruído e menor frequência de resposta).
 - A aceleração vertical medida pelo acelerômetro (medição de alta frequência, porém sujeita a ruído e deriva após integração).
 
 A estimativa final deverá ser obtida por meio de um filtro complementar.
 
-## O Filtro Complementar
+#### O Filtro Complementar
 
 O filtro complementar é uma técnica simples de fusão que combina dois sinais explorando as características complementares de cada um.
 
@@ -1140,29 +1113,3 @@ Abaixo é fornecido o código base para você começar os trabalhos. Não modifi
         """)
 
         st.code(fuse_code, language="cpp")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
