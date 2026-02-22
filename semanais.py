@@ -998,7 +998,7 @@ Hoje, essas técnicas estão presentes em drones, smartphones, robôs móveis, v
 
 Nesta atividade, você implementará um sistema simplificado de fusão de sensores para estimar altura vertical utilizando um filtro complementar para isso.
 
-O sistema utilizará dois sensores conectados via I2C:
+O sistema utilizará dois sensores conectados via I2C (vocês aprenderão melhor sobre os protocolos posteriormente):
 
 - **BMP180** – responsável por fornecer pressão atmosférica, a partir da qual é calculada a altura.
 - **MPU6050** – responsável por fornecer aceleração linear nos três eixos.
@@ -1030,7 +1030,7 @@ A estrutura geral do filtro é:
 
         st.markdown(r"""
         $$
-        h_estimada = α · h_(integrada) + (1 − α) · h_(baro)
+        h_{\text{estimada}} = \alpha \cdot h_{\text{integrada}} + (1 - \alpha) \cdot h_{\text{baro}}
         $$
         """)
 
@@ -1077,7 +1077,7 @@ Portanto:
 
         st.markdown(r"""
         $$
-        Valor medido = aceleração do movimento + gravidade
+        \text{Valor medido} = \text{aceleração do movimento} + \text{gravidade}
         $$
         """)
 
